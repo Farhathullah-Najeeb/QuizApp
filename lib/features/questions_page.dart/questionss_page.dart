@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:zealosh/features/home_page.dart/provider/question_provider.dart';
+import 'package:zealosh/features/home_page.dart/view/home_page.dart';
 import 'package:zealosh/features/questions_page.dart/provider/quiz_time_provider.dart';
 
 class QuizScreen extends StatelessWidget {
@@ -98,26 +99,33 @@ class QuizScreen extends StatelessWidget {
                         height: 5,
                       ),
                       Container(
-                          height: 35,
-                          width: 150,
-                          decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
-                          child: TextButton(
-                            onPressed: () {
-                              timerModel.resetTimer();
-                              quiz.resetQuiz;
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Back Home",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
-                            ),
-                          )),
+                        height: 35,
+                        width: 150,
+                        decoration: const BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(3))),
+                        child: TextButton(
+                          onPressed: () {
+                            timerModel.resetTimer();
+                            quiz.resetQuiz;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return const HomePage();
+                                },
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "Back Home",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -160,7 +168,9 @@ class QuizScreen extends StatelessWidget {
                                     IconButton(
                                         onPressed: () {},
                                         icon: const Icon(Icons.menu)),
-                                    Image.asset("assets/logo.jpg"),
+                                    Image.asset(
+                                      "assets/logo.jpg",
+                                    ),
                                     IconButton(
                                         onPressed: () {},
                                         icon: const Icon(
@@ -277,10 +287,33 @@ class QuizScreen extends StatelessWidget {
                 const SizedBox(height: 20.0),
                 ...(quiz.questions[quiz.questionIndex]['answers']
                         as List<Map<String, dynamic>>)
-                    .map((answer) => ElevatedButton(
-                          onPressed: () => quiz.answerQuestion(answer['score']),
-                          child: Text(answer['text']),
-                        )),
+                    .map((answer) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () =>
+                                    quiz.answerQuestion(answer['score']),
+                                child: 
+                                Container(
+                                  height: 40,
+                                  width: width / 1.3,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20)),
+                                      border: Border.all(
+                                        color: Colors.black,
+                                        width: 1.3,
+                                      )),
+                                  child: Center(child: Text(answer['text'])),
+                                ),
+                              ),
+                            )
+                        // ElevatedButton(
+                        //       onPressed: () => quiz.answerQuestion(answer['score']),
+                        //       child: Text(answer['text']),
+                        //     )
+                        ),
               ],
             ),
     );
