@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:zealosh/const/colours.dart';
-import 'package:zealosh/features/home_page.dart/view/home_page.dart'; // Import your main screen
+import 'package:zealosh/features/home_page/view/home_page.dart'; // Import your main screen
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

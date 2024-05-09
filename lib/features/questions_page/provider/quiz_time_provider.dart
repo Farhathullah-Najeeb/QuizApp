@@ -5,37 +5,46 @@ import 'package:flutter/material.dart';
 class TimerModelProvider extends ChangeNotifier {
   int _remainingTime = 10; // 60 seconds
   bool _quizOver = false;
+  late Timer _timer;
 
   int get remainingTime => _remainingTime;
   bool get quizOver => _quizOver;
 
-  Timer? _timer;
-
   TimerModelProvider() {
-    _startTimer();
+    startTimer();
   }
 
-  void _startTimer() {
+  void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      _remainingTime--;
       if (_remainingTime <= 0) {
         _quizOver = true;
-        _timer?.cancel();
+        timer.cancel();
+      } else {
+        _remainingTime--;
       }
       notifyListeners();
     });
   }
 
   void resetTimer() {
-    _remainingTime = 10; // Reset time to original duration
+    _remainingTime = 10;
     _quizOver = false;
-    _startTimer();
+    _timer.cancel();
+    startTimer();
+    notifyListeners();
+  }
+
+  void stopTimmer() {
+    _remainingTime = 10;
+    _quizOver = false;
+    _timer.cancel();
     notifyListeners();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _remainingTime = 10;
+    _timer.cancel();
     super.dispose();
   }
 }

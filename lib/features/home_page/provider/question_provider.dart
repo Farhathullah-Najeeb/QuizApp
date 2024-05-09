@@ -97,11 +97,21 @@ class QuizProvider with ChangeNotifier {
 
   int questionIndex = 0;
   int totalScore = 0;
+  bool isQuizFinished = false;
   int get currentQuestionIndex => questionIndex;
+ 
 
-  void answerQuestion(int score) {
-    totalScore += score;
-    questionIndex++;
+  void answerQuestion({required int score, required Function() quizFinished}) {
+    if (questionIndex >= _questions.length - 1) {
+      isQuizFinished = true;
+      quizFinished();
+      print("Quiz finished");
+    } else {
+      totalScore += score;
+      questionIndex++;
+      isQuizFinished = false;
+    }
+    print("Score is $totalScore");
     notifyListeners();
   }
 
@@ -109,12 +119,13 @@ class QuizProvider with ChangeNotifier {
     return ((currentQuestionIndex + 1) * questions.length) * 100;
   }
 
+   
+
   void resetQuiz() {
     questionIndex = 0;
     totalScore = 0;
     notifyListeners();
   }
- List<Map<String, dynamic>> get questions => _questions;
-  bool get isQuizFinished => questionIndex >= _questions.length;
- 
+
+  List<Map<String, dynamic>> get questions => _questions;
 }

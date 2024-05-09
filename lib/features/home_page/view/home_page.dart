@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
 
 import 'package:flutter/material.dart';
-import 'package:zealosh/features/home_page.dart/provider/question_provider.dart';
-import 'package:zealosh/features/questions_page.dart/questionss_page.dart';
+import 'package:zealosh/features/home_page/provider/question_provider.dart';
+import 'package:zealosh/features/questions_page/questions_page.dart';
 import 'package:zealosh/widgets/appbar.dart';
 
 class HomePage extends StatelessWidget {
