@@ -2,7 +2,7 @@
 
 import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:zealosh/features/home_page.dart/provider/question_provider.dart';
 import 'package:zealosh/features/questions_page.dart/questionss_page.dart';
@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quiz = Provider.of<QuizProvider>(context);
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -45,15 +44,14 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 10),
-                      child: Text(
-                        "ASP-CSP QuizMaster",
-                        style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
+                      child: Text("ASP-CSP QuizMaster",
+                          style: GoogleFonts.lato(
+                            color: kwhiteColor,
                             fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
+                            fontWeight: FontWeight.w900,
+                          )),
                     ),
                     const SizedBox(
                       height: 10,
@@ -97,12 +95,13 @@ class HomePage extends StatelessWidget {
                                             fontWeight: FontWeight.bold,
                                             color: Colors.yellow[400]),
                                       ),
-                                      const Text(
+                                      Text(
                                         "Your Total Quiz",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white),
+                                        style: GoogleFonts.lato(
+                                          color: kwhiteColor,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                       TextButton(
                                         onPressed: () {
@@ -124,12 +123,13 @@ class HomePage extends StatelessWidget {
                                           ),
                                           height: 20,
                                           width: 100,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
                                               "Start the quiz",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w400),
+                                              style: GoogleFonts.lato(
+                                                color: kwhiteColor,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -169,10 +169,12 @@ class HomePage extends StatelessWidget {
                               child: Image.asset("assets/about.png"),
                             ),
                           ),
-                          const Text(
-                            "About App",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
+                          Text("About App",
+                              style: GoogleFonts.lato(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ],
                       ),
                     ),
@@ -192,10 +194,12 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Image.asset("assets/condact.png"),
                           ),
-                          const Text(
-                            "Condact Us",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
+                          Text("Condact Us",
+                              style: GoogleFonts.lato(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              )),
                         ],
                       ),
                     ),
@@ -203,17 +207,15 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const Padding(
-                padding: EdgeInsets.all(20.0),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
                 child: Center(
-                  child: Text(
-                    "© All Rights Reserved By Zealosh",
-                    style: TextStyle(
-                      color: kBlackColor,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  child: Text("© All Rights Reserved By Zealosh",
+                      style: GoogleFonts.lato(
+                        color: Colors.black,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      )),
                 ),
               ),
             ],

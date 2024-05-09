@@ -98,6 +98,8 @@ class QuizProvider with ChangeNotifier {
   int questionIndex = 0;
   int totalScore = 0;
   int get currentQuestionIndex => questionIndex;
+  List<Map<String, dynamic>> get questions => _questions;
+  bool get isQuizFinished => questionIndex >= _questions.length;
 
   void answerQuestion(int score) {
     totalScore += score;
@@ -105,8 +107,10 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // double get progress => (questionIndex + 1);
+
   double getProgress() {
-    return ((currentQuestionIndex + 1) * questions.length) * 100;
+    return ((currentQuestionIndex + 1));
   }
 
   void resetQuiz() {
@@ -114,7 +118,4 @@ class QuizProvider with ChangeNotifier {
     totalScore = 0;
     notifyListeners();
   }
- List<Map<String, dynamic>> get questions => _questions;
-  bool get isQuizFinished => questionIndex >= _questions.length;
- 
 }
