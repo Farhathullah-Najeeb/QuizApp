@@ -97,25 +97,36 @@ class QuizProvider with ChangeNotifier {
 
   int questionIndex = 0;
   int totalScore = 0;
+  bool isQuizFinished = false;
   int get currentQuestionIndex => questionIndex;
-  List<Map<String, dynamic>> get questions => _questions;
-  bool get isQuizFinished => questionIndex >= _questions.length;
+ 
 
-  void answerQuestion(int score) {
-    totalScore += score;
-    questionIndex++;
+  void answerQuestion({required int score, required Function() quizFinished}) {
+    if (questionIndex >= _questions.length - 1) {
+      isQuizFinished = true;
+      quizFinished();
+      print("Quiz finished");
+    } else {
+      totalScore += score;
+      questionIndex++;
+      isQuizFinished = false;
+    }
+    print("Score is $totalScore");
     notifyListeners();
   }
 
-  // double get progress => (questionIndex + 1);
+ double getProgress() {
+    // Ensure this returns a fraction representing the progress.
+    return (currentQuestionIndex + 1) / questions.length;
+}
 
-  double getProgress() {
-    return ((currentQuestionIndex + 1));
-  }
+   
 
   void resetQuiz() {
     questionIndex = 0;
     totalScore = 0;
     notifyListeners();
   }
+
+  List<Map<String, dynamic>> get questions => _questions;
 }

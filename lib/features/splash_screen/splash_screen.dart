@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:zealosh/const/colours.dart';
-import 'package:zealosh/features/home_page.dart/view/home_page.dart'; // Import your main screen
+import 'package:zealosh/features/home_page/view/home_page.dart'; // Import your main screen
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [kBlackColor, kwhiteColor, kGreenColor],
+              colors: [kwhiteColor, kwhiteColor, kGreenColor],
               tileMode: TileMode.repeated),
         ),
         child: Center(
