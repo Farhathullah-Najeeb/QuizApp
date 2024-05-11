@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Center(
                           child: Container(
-                            height: height / 5,
+                            height: 140,
                             width: width / 1.1,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -109,7 +109,6 @@ class HomePage extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(

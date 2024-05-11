@@ -295,9 +295,9 @@ class QuizScreen extends StatelessWidget {
                                     color: Colors.white,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        blurRadius: 2,
-                                      ),
+                                          color: Colors.grey.withOpacity(0.5),
+                                          blurRadius: 2,
+                                          offset: const Offset(1, 3)),
                                     ],
                                   ),
                                   child: Column(
@@ -452,7 +452,7 @@ class QuizScreen extends StatelessWidget {
             Consumer<QuizProvider>(
               builder: (_, ref, __) {
                 return Consumer<TimerModelProvider>(
-                  builder: (_,ref1, __) {
+                  builder: (_, ref1, __) {
                     return TextButton(
                       onPressed: () {
                         ref1.resetTimer();
