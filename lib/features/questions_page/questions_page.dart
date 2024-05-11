@@ -1,21 +1,15 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:zealosh/features/home_page/provider/question_provider.dart';
 import 'package:zealosh/features/questions_page/provider/quiz_time_provider.dart';
 import 'package:zealosh/features/result_page/result_page.dart';
 
-class QuizScreen extends StatefulWidget {
+class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
 
-  @override
-  State<QuizScreen> createState() => _QuizScreenState();
-}
-
-class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -98,7 +92,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 Consumer<QuizProvider>(
                                   builder: (context, quizProvider, child) {
                                     return Text(
-                                      'Question ${quizProvider.questionIndex + 1}',
+                                      'Question ${quizProvider.questionIndex}',
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
@@ -161,20 +155,38 @@ class _QuizScreenState extends State<QuizScreen> {
                                   padding: const EdgeInsets.only(
                                       bottom: 10, left: 12),
                                   child: Consumer<QuizProvider>(
-                                    builder: (context, provider, child) =>
-                                        LinearPercentIndicator(
-                                      width: MediaQuery.of(context).size.width -
-                                          23,
-                                      animation: true,
-                                      lineHeight: 10.0,
-                                      animationDuration: 1,
-                                      percent: provider.getProgress(),
-                                      // center: Text(
-                                      //     "${(provider.getProgress() * 100).toStringAsFixed(1)}%"),
-                                      linearStrokeCap: LinearStrokeCap.roundAll,
-                                      progressColor: darkGreen,
-                                    ),
-                                  ),
+                                      builder: (context, provider, child) =>
+                                          SizedBox(
+                                            width: 300,
+                                            height: 10,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
+                                              child: LinearProgressIndicator(
+                                                value: provider.getProgress(),
+                                                valueColor:
+                                                    const AlwaysStoppedAnimation<
+                                                        Color>(darkGreen),
+                                                backgroundColor:
+                                                    const Color(0xffD6D6D6),
+                                              ),
+                                            ),
+                                          )
+                                      //     LinearPercentIndicator(
+                                      //   width: MediaQuery.of(context).size.width -
+                                      //       23,
+                                      //   animation: true,
+                                      //   lineHeight: 10.0,
+                                      //   animationDuration: 1,
+                                      //   percent: provider.getProgress(),
+                                      //   // center: Text(
+                                      //   //     "${(provider.getProgress() * 100).toStringAsFixed(1)}%"),
+                                      //   linearStrokeCap: LinearStrokeCap.roundAll,
+
+                                      //   progressColor: darkGreen,
+                                      // ),
+                                      ),
                                 );
                               },
                             ),
@@ -230,19 +242,25 @@ class _QuizScreenState extends State<QuizScreen> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 13),
-                                  child: Container(
-                                    height: 20,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: const Center(
-                                      child: Text(
-                                        "Read Explanation",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w600),
+                                  child: InkWell(
+                                    onTap: () {
+                                      _showPopup(context);
+                                    },
+                                    child: Container(
+                                      height: 20,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
+                                        child: Text(
+                                          "Read Explanation",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 9,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -257,7 +275,8 @@ class _QuizScreenState extends State<QuizScreen> {
               const SizedBox(height: 20.0),
               ...(quiz.questions[quiz.questionIndex]['answers']
                       as List<Map<String, dynamic>>)
-                  .map((answer) => Padding(
+                  .map((answer) =>
+                   Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () => quiz.answerQuestion(
@@ -271,7 +290,8 @@ class _QuizScreenState extends State<QuizScreen> {
                               );
                             },
                           ),
-                          child: Container(
+                          child:
+                           Container(
                             height: 40,
                             width: width / 1.3,
                             decoration: BoxDecoration(
@@ -292,5 +312,49 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
       );
     });
+  }
+
+  void _showPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            "Explanation",
+            style: TextStyle(
+              color: kGreenColor,
+              fontSize: 19,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: const Text(
+            "During the construction of a stainless steel pressure vessel, the most toxic welding fume generated would likely be chromium fumes. Stainless steel typically contains chromium, and during the welding process, especially if it involves high temperatures or poor ventilation, chromium fumes can be released. Chromium fumes are known to be hazardous, particularly hexavalent chromium compounds, which can cause respiratory issues and are classified as carcinogenic. Therefore, proper ventilation, personal protective equipment, and adherence to safety guidelines are essential to mitigate the risks associated with welding fumes.",
+            style: TextStyle(fontSize: 12),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Container(
+                height: 30,
+                width: 80,
+                decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(7))),
+                child: const Center(
+                  child: Text(
+                    "Close",
+                    style: TextStyle(
+                      color: kwhiteColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 }

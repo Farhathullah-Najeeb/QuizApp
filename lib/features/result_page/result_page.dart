@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:zealosh/features/home_page/provider/question_provider.dart';
@@ -27,120 +28,162 @@ class ResultPage extends StatelessWidget {
           height: height,
           width: width,
           color: kDGreenColor,
-          child: Center(
-            child: Container(
-              height: height / 1.7,
-              width: width / 1.1,
-              decoration: BoxDecoration(
-                  color: backgroundcolor,
-                  borderRadius: BorderRadius.circular(30)),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const SizedBox(
-                    height: 74,
-                    width: 162,
-                    child: Image(
-                        image: AssetImage("assets/stars-removebg-preview.png")),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Text(
-                      "You Have Been Succesfully",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 100,
+                width: width,
+                color: kDGreenColor,
+                child: Image.asset(
+                  "assets/celebration-removebg-preview.png",
+                  fit: BoxFit.fill,
+                ),
+              ),
+              // const SizedBox(
+              //   height: 30,
+              // ),
+              Container(
+                height: height / 1.7,
+                width: width / 1.1,
+                decoration: BoxDecoration(
+                    color: backgroundcolor,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const Text("Completed This Section",
-                      style: TextStyle(color: Colors.white, fontSize: 14)),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          quiz.totalScore.toString(),
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.yellow.shade400,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        const Text(
-                          "/10",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    const SizedBox(
+                      height: 74,
+                      width: 162,
+                      child: Image(
+                          image:
+                              AssetImage("assets/stars-removebg-preview.png")),
                     ),
-                  ),
-                  const Text("Your Score",
-                      style: TextStyle(color: Colors.white, fontSize: 7)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        "You Have Been Succesfully",
+                        style: GoogleFonts.lato(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Completed This Section",
+                      style: GoogleFonts.lato(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            quiz.totalScore.toString(),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.yellow.shade400,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Text(
+                            "/10",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text("Your Score",
+                        style: GoogleFonts.lato(
+                          color: Colors.white,
+                          fontSize: 12,
+                          // fontWeight: FontWeight.w700,
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        height: 35,
+                        width: 150,
+                        decoration: const BoxDecoration(
+                            color: darkGreen,
+                            borderRadius: BorderRadius.all(Radius.circular(3))),
+                        child: TextButton(
+                          onPressed: () {
+                            timerModel.resetTimer();
+                            quiz.resetQuiz();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const QuizScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Play Again",
+                            style: GoogleFonts.lato(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        )),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
                       height: 35,
                       width: 150,
                       decoration: const BoxDecoration(
-                          color: darkGreen,
+                          color: Colors.grey,
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                       child: TextButton(
                         onPressed: () {
                           timerModel.resetTimer();
                           quiz.resetQuiz();
-                          Navigator.pushReplacement(
+                          Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizScreen(),
+                              builder: (BuildContext context) {
+                                return const HomePage();
+                              },
                             ),
+                            (route) => false,
                           );
                         },
-                        child: const Text(
-                          "Play Again",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
-                        ),
-                      )),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 35,
-                    width: 150,
-                    decoration: const BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                    child: TextButton(
-                      onPressed: () {
-                        timerModel.resetTimer();
-                        quiz.resetQuiz();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const HomePage();
-                            },
-                          ),
-                          (route) => false,
-                        );
-                      },
-                      child: const Text(
-                        "Back Home",
-                        style: TextStyle(
+                        child: Text(
+                          "Back Home",
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              Container(
+                height: 100,
+                width: width,
+                color: kDGreenColor,
+                child: Image.asset(
+                  "assets/celebration-removebg-preview.png",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ],
           ),
         ),
       ),

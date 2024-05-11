@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'package:provider/provider.dart';
+import 'package:zealosh/about_page/about_page.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
@@ -159,14 +160,24 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AboutPage()),
+                              );
+                            },
                             child: Container(
                               height: 70,
                               width: 70,
                               decoration: BoxDecoration(
                                   color: backgroundcolor,
                                   borderRadius: BorderRadius.circular(10)),
-                              child: Image.asset("assets/about.png"),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Image.asset("assets/about_button.png",
+                                    fit: BoxFit.fill),
+                              ),
                             ),
                           ),
                           Text("About App",
@@ -192,7 +203,14 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: backgroundcolor,
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Image.asset("assets/condact.png"),
+                            child: SizedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Image.asset(
+                                  "assets/contact.png",
+                                ),
+                              ),
+                            ),
                           ),
                           Text("Condact Us",
                               style: GoogleFonts.lato(

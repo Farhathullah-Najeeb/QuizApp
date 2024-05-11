@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zealosh/const/colours.dart';
 
 class QuizProvider with ChangeNotifier {
   final List<Map<String, dynamic>> _questions = [
@@ -99,7 +100,6 @@ class QuizProvider with ChangeNotifier {
   int totalScore = 0;
   bool isQuizFinished = false;
   int get currentQuestionIndex => questionIndex;
- 
 
   void answerQuestion({required int score, required Function() quizFinished}) {
     if (questionIndex >= _questions.length - 1) {
@@ -115,12 +115,9 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
- double getProgress() {
-    // Ensure this returns a fraction representing the progress.
-    return (currentQuestionIndex + 1) / questions.length;
-}
-
-   
+  double getProgress() {
+    return (currentQuestionIndex) / questions.length;
+  }
 
   void resetQuiz() {
     questionIndex = 0;
@@ -128,5 +125,8 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
+
   List<Map<String, dynamic>> get questions => _questions;
+  
+
 }
