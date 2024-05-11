@@ -88,16 +88,19 @@ class AboutPage extends StatelessWidget {
                               margin:
                                   const EdgeInsets.only(bottom: 30, top: 20),
                               decoration: const BoxDecoration(
-                                color: Color(0xFF44592A),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                              ),
-                              child: Row(
+                                  color: Color(0xFF44592A),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/aboutscreen.png"),
+                                    fit: BoxFit.cover,
+                                  )),
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                  Padding(
+                                    padding: EdgeInsets.all(5.0),
                                     child: Text(
                                       "About Us",
                                       style: TextStyle(
@@ -107,13 +110,13 @@ class AboutPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                      height: 80,
-                                      width: 100,
-                                      child: Image.asset(
-                                        "assets/about_page.png",
-                                        fit: BoxFit.fill,
-                                      ))
+                                  // SizedBox(
+                                  //     height: 80,
+                                  //     width: 100,
+                                  //     child: Image.asset(
+                                  //       "assets/about_page.png",
+                                  //       fit: BoxFit.fill,
+                                  //     ))
                                 ],
                               ),
                             ),

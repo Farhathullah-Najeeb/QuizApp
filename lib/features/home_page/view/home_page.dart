@@ -65,21 +65,16 @@ class HomePage extends StatelessWidget {
                             height: height / 5,
                             width: width / 1.1,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: darkGreen,
-                            ),
+                                borderRadius: BorderRadius.circular(20),
+                                color: darkGreen,
+                                image: const DecorationImage(
+                                  image: AssetImage("assets/homescreen.png"),
+                                  fit: BoxFit.cover,
+                                )),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 2),
-                                  child: SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: Image.asset(
-                                        "assets/einsteen-removebg-preview.png"),
-                                  ),
-                                ),
+                                const SizedBox(),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Column(
