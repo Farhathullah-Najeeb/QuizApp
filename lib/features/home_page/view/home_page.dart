@@ -109,9 +109,7 @@ class HomePage extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          // quiz.dispose();
-                                          // quiz.resetQuiz();
-                                          // quiz.resetQuiz;
+                                          
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(

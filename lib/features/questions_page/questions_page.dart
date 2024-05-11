@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:zealosh/features/home_page/provider/question_provider.dart';
+import 'package:zealosh/features/home_page/view/home_page.dart';
 import 'package:zealosh/features/questions_page/provider/quiz_time_provider.dart';
 import 'package:zealosh/features/result_page/result_page.dart';
 
@@ -11,7 +12,9 @@ class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -71,14 +74,23 @@ class QuizScreen extends StatelessWidget {
                                 children: [
                                   IconButton(
                                       onPressed: () {},
-                                      icon: const Icon(Icons.menu)),
+                                      icon: const Icon(
+                                        Icons.menu,
+                                        color: Colors.grey,
+                                        size: 18,
+                                      )),
                                   Image.asset(
                                     "assets/logo.jpg",
                                   ),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        exitScreenPopup(context);
+                                      },
                                       icon: const Icon(
-                                          Icons.notifications_none_sharp)),
+                                        Icons.exit_to_app_rounded,
+                                        color: Colors.grey,
+                                        size: 18,
+                                      )),
                                 ],
                               ),
                             ),
@@ -395,6 +407,88 @@ class QuizScreen extends StatelessWidget {
                 ),
               ),
             )
+          ],
+        );
+      },
+    );
+  }
+
+  void exitScreenPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Center(
+            child: Text(
+              "Do You Want To Exit",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Container(
+                height: 30,
+                width: 80,
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(7))),
+                child: const Center(
+                  child: Text(
+                    "No",
+                    style: TextStyle(
+                      color: kwhiteColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Consumer<QuizProvider>(
+              builder: (_, ref, __) {
+                return Consumer<TimerModelProvider>(
+                  builder: (_,ref1, __) {
+                    return TextButton(
+                      onPressed: () {
+                        ref1.resetTimer();
+                        ref.resetQuiz();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return const HomePage();
+                            },
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 80,
+                        decoration: const BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(7))),
+                        child: const Center(
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(
+                              color: kwhiteColor,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ],
         );
       },
