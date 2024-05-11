@@ -100,7 +100,7 @@ class AboutPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: EdgeInsets.only(left: 10),
                                     child: Text(
                                       "About Us",
                                       style: TextStyle(

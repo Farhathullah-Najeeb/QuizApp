@@ -41,9 +41,9 @@ class QuizScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(bottom: 80.0),
+                      margin: const EdgeInsets.only(bottom: 350.0),
                       alignment: Alignment.topCenter,
-                      height: 270.0,
+                      height: 290.0,
                       decoration: const BoxDecoration(
                           color: backgroundcolor,
                           borderRadius: BorderRadius.only(
@@ -120,7 +120,7 @@ class QuizScreen extends StatelessWidget {
                                         width: 100,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(2),
+                                              BorderRadius.circular(5),
                                           color: Colors.black,
                                         ),
                                         child: Center(
@@ -156,20 +156,24 @@ class QuizScreen extends StatelessWidget {
                                       bottom: 10, left: 12),
                                   child: Consumer<QuizProvider>(
                                       builder: (context, provider, child) =>
-                                          SizedBox(
-                                            width: 300,
-                                            height: 10,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(10)),
-                                              child: LinearProgressIndicator(
-                                                value: provider.getProgress(),
-                                                valueColor:
-                                                    const AlwaysStoppedAnimation<
-                                                        Color>(darkGreen),
-                                                backgroundColor:
-                                                    const Color(0xffD6D6D6),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
+                                            child: SizedBox(
+                                              width: 300,
+                                              height: 10,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(10)),
+                                                child: LinearProgressIndicator(
+                                                  value: provider.getProgress(),
+                                                  valueColor:
+                                                      const AlwaysStoppedAnimation<
+                                                          Color>(darkGreen),
+                                                  backgroundColor:
+                                                      const Color(0xffD6D6D6),
+                                                ),
                                               ),
                                             ),
                                           )
@@ -198,115 +202,154 @@ class QuizScreen extends StatelessWidget {
                       top: 160.0,
                       right: -10.0,
                       left: -10.0,
-                      // bottom: 10,
                       child: Container(
                           width: 400.0,
-                          height: 400,
+                          height: 500,
                           padding: const EdgeInsets.symmetric(
-                              vertical: 30.0, horizontal: 25.0),
-                          child: Container(
-                            height: 300,
-                            width: 350,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade700,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(15))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 13, top: 10),
-                                  child: Text(
-                                    "Questions",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 7,
-                                ),
-                                Center(
-                                  child: SizedBox(
-                                    height: height / 7.5,
-                                    width: width / 1.2,
-                                    child: Text(
-                                      quiz.questions[quiz.questionIndex]
-                                          ['questionText'],
-                                      style: const TextStyle(
-                                          fontSize: 15.0, color: Colors.white),
-                                      // textAlign: TextAlign.center,
+                              vertical: 15.0, horizontal: 25.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade700,
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15))),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 13, top: 10),
+                                      child: Text(
+                                        "Questions",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 13),
-                                  child: InkWell(
-                                    onTap: () {
-                                      _showPopup(context);
-                                    },
-                                    child: Container(
-                                      height: 20,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: const Center(
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                    Center(
+                                      child: SizedBox(
+                                        height: height / 9,
+                                        width: width / 1.2,
                                         child: Text(
-                                          "Read Explanation",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 9,
-                                              fontWeight: FontWeight.w600),
+                                          quiz.questions[quiz.questionIndex]
+                                              ['questionText'],
+                                          style: const TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 13, bottom: 10),
+                                      child: InkWell(
+                                        onTap: () {
+                                          _showPopup(context);
+                                        },
+                                        child: Container(
+                                          height: 20,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Center(
+                                            child: Text(
+                                              "Read Explanation",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 9,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  width: width / 1,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 20.0),
+                                      ...(quiz.questions[quiz.questionIndex]
+                                                  ['answers']
+                                              as List<Map<String, dynamic>>)
+                                          .map((answer) => Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      quiz.answerQuestion(
+                                                    score: answer['score'],
+                                                    quizFinished: () {
+                                                      Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const ResultPage(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                  child: Container(
+                                                    height: 40,
+                                                    width: width / 1.3,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        20)),
+                                                        border: Border.all(
+                                                          color: Colors.black,
+                                                          width: 1.3,
+                                                        )),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child:
+                                                          Text(answer['text']),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )),
+                                      const SizedBox(
+                                        height: 10,
+                                      )
+                                    ],
+                                  )),
+                            ],
                           )),
                     ),
                   ],
                 ),
               ]),
-              const SizedBox(height: 20.0),
-              ...(quiz.questions[quiz.questionIndex]['answers']
-                      as List<Map<String, dynamic>>)
-                  .map((answer) =>
-                   Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () => quiz.answerQuestion(
-                            score: answer['score'],
-                            quizFinished: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ResultPage(),
-                                ),
-                              );
-                            },
-                          ),
-                          child:
-                           Container(
-                            height: 40,
-                            width: width / 1.3,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20)),
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 1.3,
-                                )),
-                            child: Center(child: Text(answer['text'])),
-                          ),
-                        ),
-                      )),
             ],
           ),
         ),

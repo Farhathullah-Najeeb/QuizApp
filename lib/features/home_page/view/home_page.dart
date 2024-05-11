@@ -79,24 +79,32 @@ class HomePage extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(
                                         height: 20,
                                       ),
-                                      Text(
-                                        quiz.totalScore.toString(),
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.yellow[400]),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          quiz.totalScore.toString(),
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.yellow[400]),
+                                        ),
                                       ),
-                                      Text(
-                                        "Your Total Quiz",
-                                        style: GoogleFonts.lato(
-                                          color: kwhiteColor,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          "Your Total Quiz",
+                                          style: GoogleFonts.lato(
+                                            color: kwhiteColor,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
                                       TextButton(
@@ -123,7 +131,8 @@ class HomePage extends StatelessWidget {
                                             child: Text(
                                               "Start the quiz",
                                               style: GoogleFonts.lato(
-                                                color: kwhiteColor,
+                                                fontSize: 10,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),

@@ -1,97 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:zealosh/const/colours.dart';
 
 class QuizProvider with ChangeNotifier {
   final List<Map<String, dynamic>> _questions = [
     {
       'questionText': 'What is Flutter?',
       'answers': [
-        {'text': 'A programming language', 'score': 0},
-        {'text': 'A web framework', 'score': 0},
-        {'text': 'A mobile UI framework', 'score': 1},
-        {'text': 'A game', 'score': 0},
+        {'text': 'A. A programming language', 'score': 0},
+        {'text': 'B. A web framework', 'score': 0},
+        {'text': 'C. A mobile UI framework', 'score': 1},
+        {'text': 'D. A game', 'score': 0},
       ],
     },
     {
       'questionText': 'What does the acronym "Dart" stand for?',
       'answers': [
-        {'text': 'Digital Art', 'score': 0},
-        {'text': 'Dynamic and Rapid Technology', 'score': 0},
-        {'text': 'Developed App Runtime', 'score': 0},
-        {'text': 'Structured Web Programming Language', 'score': 1},
+        {'text': 'A. Digital Art', 'score': 0},
+        {'text': 'B. Dynamic and Rapid Technology', 'score': 0},
+        {'text': 'C. Developed App Runtime', 'score': 0},
+        {'text': 'D. Structured Web Programming Language', 'score': 1},
       ],
     },
     {
       'questionText':
           'Which widget is used to display a list of items in Flutter?',
       'answers': [
-        {'text': 'ListView', 'score': 1},
-        {'text': 'GridView', 'score': 0},
-        {'text': 'Column', 'score': 0},
-        {'text': 'Row', 'score': 0},
+        {'text': 'A. ListView', 'score': 1},
+        {'text': 'B. GridView', 'score': 0},
+        {'text': 'C. Column', 'score': 0},
+        {'text': 'D. Row', 'score': 0},
       ],
     },
     {
       'questionText': 'What is the purpose of the "BuildContext" in Flutter?',
       'answers': [
-        {'text': 'To manage state', 'score': 0},
-        {'text': 'To build widgets', 'score': 1},
-        {'text': 'To handle user input', 'score': 0},
-        {'text': 'To define routes', 'score': 0},
+        {'text': 'A. To manage state', 'score': 0},
+        {'text': 'B. To build widgets', 'score': 1},
+        {'text': 'C. To handle user input', 'score': 0},
+        {'text': 'D. To define routes', 'score': 0},
       ],
     },
     {
       'questionText': 'What is the main function in a Flutter app?',
       'answers': [
-        {'text': 'The entry point of the app', 'score': 1},
-        {'text': 'The root widget', 'score': 0},
-        {'text': 'The first screen displayed', 'score': 0},
-        {'text': 'The app configuration', 'score': 0},
+        {'text': 'A. The entry point of the app', 'score': 1},
+        {'text': 'B. The root widget', 'score': 0},
+        {'text': 'C. The first screen displayed', 'score': 0},
+        {'text': 'D. The app configuration', 'score': 0},
       ],
     },
     {
       'questionText': 'Which widget is used to create a button in Flutter?',
       'answers': [
-        {'text': 'TextButton', 'score': 0},
-        {'text': 'ElevatedButton', 'score': 1},
-        {'text': 'FlatButton', 'score': 0},
-        {'text': 'IconButton', 'score': 0},
+        {'text': 'A. TextButton', 'score': 0},
+        {'text': 'B. ElevatedButton', 'score': 1},
+        {'text': 'C. FlatButton', 'score': 0},
+        {'text': 'D. IconButton', 'score': 0},
       ],
     },
     {
       'questionText': 'What is the purpose of the "setState" method?',
       'answers': [
-        {'text': 'To update the UI', 'score': 1},
-        {'text': 'To manage state', 'score': 0},
-        {'text': 'To create widgets', 'score': 0},
-        {'text': 'To handle user input', 'score': 0},
+        {'text': 'A. To update the UI', 'score': 1},
+        {'text': 'B. To manage state', 'score': 0},
+        {'text': 'D. To create widgets', 'score': 0},
+        {'text': 'C..To handle user input', 'score': 0},
       ],
     },
     {
       'questionText': 'What is the tallest mammal??',
       'answers': [
-        {'text': 'Elephant', 'score': 0},
-        {'text': 'Giraffe', 'score': 1},
-        {'text': 'Kangaroo', 'score': 0},
-        {'text': 'Horse', 'score': 0},
+        {'text': 'A. Elephant', 'score': 0},
+        {'text': 'B. Giraffe', 'score': 1},
+        {'text': 'C. Kangaroo', 'score': 0},
+        {'text': 'D. Horse', 'score': 0},
       ],
     },
     {
       'questionText': 'What is the purpose of the "async" keyword in Dart?',
       'answers': [
-        {'text': 'To define asynchronous functions', 'score': 1},
-        {'text': 'To handle exceptions', 'score': 0},
-        {'text': 'To create streams', 'score': 0},
-        {'text': 'To manage memory', 'score': 0},
+        {'text': 'A. To define asynchronous functions', 'score': 1},
+        {'text': 'B. To handle exceptions', 'score': 0},
+        {'text': 'C. To create streams', 'score': 0},
+        {'text': 'D. To manage memory', 'score': 0},
       ],
     },
     {
       'questionText': 'Which widget is used to display images in Flutter?',
       'answers': [
-        {'text': 'Image', 'score': 1},
-        {'text': 'Icon', 'score': 0},
-        {'text': 'Picture', 'score': 0},
-        {'text': 'ImageView', 'score': 0},
+        {'text': 'A. Image', 'score': 1},
+        {'text': 'B. Icon', 'score': 0},
+        {'text': 'C. Picture', 'score': 0},
+        {'text': 'D. ImageView', 'score': 0},
       ],
     },
   ];
@@ -125,8 +124,5 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
   List<Map<String, dynamic>> get questions => _questions;
-  
-
 }
