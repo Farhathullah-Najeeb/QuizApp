@@ -6,6 +6,7 @@ import 'package:zealosh/features/home_page/provider/question_provider.dart';
 import 'package:zealosh/features/home_page/view/home_page.dart';
 import 'package:zealosh/features/questions_page/provider/quiz_time_provider.dart';
 import 'package:zealosh/features/questions_page/questions_page.dart';
+import 'package:zealosh/hive/provider/hive_provider.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
@@ -15,6 +16,8 @@ class ResultPage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final quiz = Provider.of<QuizProvider>(context);
+    final storage = Provider.of<StorageProvider>(context);
+
     final timerModel = Provider.of<TimerModelProvider>(context);
 
     return PopScope(
@@ -117,6 +120,7 @@ class ResultPage extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(3))),
                         child: TextButton(
                           onPressed: () {
+                            storage.increment();
                             timerModel.resetTimer();
                             quiz.resetQuiz();
                             Navigator.pushReplacement(

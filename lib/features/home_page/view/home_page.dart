@@ -5,8 +5,8 @@ import 'package:zealosh/about_page/about_page.dart';
 import 'package:zealosh/const/colours.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:zealosh/features/home_page/provider/question_provider.dart';
 import 'package:zealosh/features/questions_page/questions_page.dart';
+import 'package:zealosh/hive/provider/hive_provider.dart';
 import 'package:zealosh/widgets/appbar.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final quiz = Provider.of<QuizProvider>(context);
+    final storage = Provider.of<StorageProvider>(context);
     // final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(left: 10),
                                         child: Text(
-                                          quiz.totalScore.toString(),
+                                          storage.counterss.toString(),
                                           style: TextStyle(
                                               fontSize: 25,
                                               fontWeight: FontWeight.bold,
@@ -109,6 +109,7 @@ class HomePage extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
+                                          storage.increment();
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zealosh/hive/hive.dart';
 
 class QuizProvider with ChangeNotifier {
   final List<Map<String, dynamic>> _questions = [
@@ -99,6 +100,14 @@ class QuizProvider with ChangeNotifier {
   int totalScore = 0;
   bool isQuizFinished = false;
   int get currentQuestionIndex => questionIndex;
+  int _participants = 0;
+  int get participants => _participants;
+  List<Map<String, dynamic>> get questions => _questions;
+
+  void increment() {
+    _participants++;
+    notifyListeners();
+  }
 
   void answerQuestion({required int score, required Function() quizFinished}) {
     if (questionIndex >= _questions.length - 1) {
@@ -124,5 +133,10 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> get questions => _questions;
+  final CounterStorage _storage = CounterStorage();
+  int get counter => _storage.counterValue;
+  Future<void> increments() async {
+    await _storage.incrementCounter();
+    notifyListeners();
+  }
 }
