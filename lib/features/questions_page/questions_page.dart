@@ -73,16 +73,6 @@ class QuizScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.menu,
-                                        color: Colors.grey,
-                                        size: 18,
-                                      )),
-                                  Image.asset(
-                                    "assets/logo.jpg",
-                                  ),
-                                  IconButton(
                                       onPressed: () {
                                         exitScreenPopup(context);
                                       },
@@ -91,6 +81,15 @@ class QuizScreen extends StatelessWidget {
                                         color: Colors.grey,
                                         size: 18,
                                       )),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      "assets/logo.jpg",
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                  ),
                                 ],
                               ),
                             ),
@@ -310,24 +309,29 @@ class QuizScreen extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: InkWell(
-                                                  onTap: () =>
-                                                      quiz.answerQuestion(
-                                                    score: answer['score'],
-                                                    quizFinished: () {
-                                                      Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ResultPage(),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                  child: Container(
+                                                  onTap: () {
+                                                    // const Duration(seconds: 3);
+                                                    quiz.answerQuestion(
+                                                      score: answer['score'],
+                                                      quizFinished: () {
+                                                        Navigator
+                                                            .pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const ResultPage(),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: 
+                                                  
+                                                  Container(
                                                     height: 40,
                                                     width: width / 1.3,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.white,
+                                                        color: answer['color'],
                                                         borderRadius:
                                                             const BorderRadius
                                                                 .only(

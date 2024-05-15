@@ -47,3 +47,41 @@
 //   }
 // }
 
+import 'package:flutter/material.dart';
+
+class QuizButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final bool isCorrect;
+  final Function() onPressed;
+
+  const QuizButton({super.key, 
+    required this.text,
+    required this.isSelected,
+    required this.isCorrect,
+    required this.onPressed,
+  });
+
+  Color getColor() {
+    Color color;
+    if (isSelected && isCorrect) {
+      color = Colors.green;
+    } else if (isSelected && !isCorrect) {
+      color = Colors.red;
+    } else {
+      color = Colors.grey;
+    }
+    return color;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(getColor()),
+      ),
+      child: Text(text),
+    );
+  }
+}
