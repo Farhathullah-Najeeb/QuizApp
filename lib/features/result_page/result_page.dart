@@ -123,6 +123,7 @@ class ResultPage extends StatelessWidget {
                             storage.increment();
                             timerModel.resetTimer();
                             quiz.resetQuiz();
+                            
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

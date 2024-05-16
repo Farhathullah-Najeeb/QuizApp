@@ -77,7 +77,7 @@ class QuizScreen extends StatelessWidget {
                                         exitScreenPopup(context);
                                       },
                                       icon: const Icon(
-                                        Icons.exit_to_app_rounded,
+                                        Icons.arrow_back_ios,
                                         color: Colors.grey,
                                         size: 18,
                                       )),
@@ -309,8 +309,15 @@ class QuizScreen extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: InkWell(
-                                                  onTap: () {
-                                                    // const Duration(seconds: 3);
+                                                  onTap: () async {
+                                                    bool selectedAnswerIsTrue =
+                                                        answer['score'] == 1;
+                                                    quiz.showCorrectAnswer(
+                                                        selectedAnswerIsTrue);
+                                                    await Future.delayed(
+                                                        const Duration(
+                                                            seconds:
+                                                                2)); 
                                                     quiz.answerQuestion(
                                                       score: answer['score'],
                                                       quizFinished: () {
@@ -325,9 +332,7 @@ class QuizScreen extends StatelessWidget {
                                                       },
                                                     );
                                                   },
-                                                  child: 
-                                                  
-                                                  Container(
+                                                  child: Container(
                                                     height: 40,
                                                     width: width / 1.3,
                                                     decoration: BoxDecoration(
@@ -359,7 +364,7 @@ class QuizScreen extends StatelessWidget {
                                         height: 10,
                                       )
                                     ],
-                                  )),
+                                  ))
                             ],
                           )),
                     ),
