@@ -286,85 +286,103 @@ class QuizScreen extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                  width: width / 1,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          blurRadius: 2,
-                                          offset: const Offset(1, 3)),
-                                    ],
+                                width: width,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 20.0),
-                                      ...(quiz.questions[quiz.questionIndex]
-                                                  ['answers']
-                                              as List<Map<String, dynamic>>)
-                                          .map((answer) => Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    bool selectedAnswerIsTrue =
-                                                        answer['score'] == 1;
-                                                    quiz.showCorrectAnswer(
-                                                        selectedAnswerIsTrue);
-                                                    await Future.delayed(
-                                                        const Duration(
-                                                            seconds:
-                                                                2)); 
-                                                    quiz.answerQuestion(
-                                                      score: answer['score'],
-                                                      quizFinished: () {
-                                                        Navigator
-                                                            .pushReplacement(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ResultPage(),
-                                                          ),
-                                                        );
-                                                      },
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      blurRadius: 2,
+                                      offset: const Offset(1, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: quiz
+                                          .questions[quiz.questionIndex]
+                                              ['answers']
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        final answer =
+                                            quiz.questions[quiz.questionIndex]
+                                                ['answers'][index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              if (!quiz.isProcessing) {
+                                                quiz.isProcessing = true;
+                                                quiz.isCheckSelectedAnsweriSCorrect(
+                                                  selectedAnswerIndex1: index,
+                                                  selectedAnswer: answer,
+                                                );
+                                                await Future.delayed(
+                                                    const Duration(seconds: 2));
+                                                quiz.answerQuestion(
+                                                  score: answer['score'],
+                                                  quizFinished: () {
+                                                    Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ResultPage(),
+                                                      ),
                                                     );
                                                   },
-                                                  child: Container(
-                                                    height: 40,
-                                                    width: width / 1.3,
-                                                    decoration: BoxDecoration(
-                                                        color: answer['color'],
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        20),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        20)),
-                                                        border: Border.all(
-                                                          color: Colors.black,
-                                                          width: 1.3,
-                                                        )),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child:
-                                                          Text(answer['text']),
-                                                    ),
-                                                  ),
+                                                );
+                                                quiz.isProcessing = false;
+                                              }
+                                            },
+                                            child: Container(
+                                              height: 40,
+                                              width: width / 1.3,
+                                              decoration: BoxDecoration(
+                                                color: quiz.correctAnswerIndex ==
+                                                        index
+                                                    ? Colors
+                                                        .green // Green for correct answer
+                                                    : (quiz.selectedAnswerIndex ==
+                                                                index &&
+                                                            quiz.selectedAnswerIndex !=
+                                                                quiz
+                                                                    .correctAnswerIndex)
+                                                        ? Colors
+                                                            .red // Red for incorrect answer (selected but wrong)
+                                                        : null, // No color for unselected answers
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  bottomRight:
+                                                      Radius.circular(20),
                                                 ),
-                                              )),
-                                      const SizedBox(
-                                        height: 10,
-                                      )
-                                    ],
-                                  ))
+                                                border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1.3,
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(answer['text']),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                ),
+                              )
                             ],
                           )),
                     ),

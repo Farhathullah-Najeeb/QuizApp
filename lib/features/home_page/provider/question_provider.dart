@@ -112,9 +112,13 @@ class QuizProvider with ChangeNotifier {
   ];
 
   int questionIndex = 0;
+  int selectedAnswerIndex = -1;
+  int correctAnswerIndex = -1;
   int answerIndex = 0;
   int totalScore = 0;
+
   bool isQuizFinished = false;
+  bool isProcessing = false;
   int get currentQuestionIndex => questionIndex;
   int get currentAnswerIndex => answerIndex;
   int _participants = 0;
@@ -129,10 +133,13 @@ class QuizProvider with ChangeNotifier {
   void answerQuestion({required int score, required Function() quizFinished}) {
     if (questionIndex >= _questions.length - 1) {
       isQuizFinished = true;
+      resetSelectedAnswer();
       quizFinished();
+
       print("Quiz finished");
     } else {
       totalScore += score;
+      resetSelectedAnswer();
       questionIndex++;
       isQuizFinished = false;
     }
@@ -151,6 +158,12 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void resetSelectedAnswer() {
+    correctAnswerIndex = -1;
+    selectedAnswerIndex = -1;
+    notifyListeners();
+  }
+
   final CounterStorage _storage = CounterStorage();
   int get counter => _storage.counterValue;
   Future<void> increments() async {
@@ -158,18 +171,33 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void showCorrectAnswer(bool selectedAnswerIsTrue) {
-    if (selectedAnswerIsTrue) {
-      _questions[questionIndex]['answers'][answerIndex]['color'] = Colors.green;
-      print("User selected the true answer");
-    } else {
-      _questions[questionIndex]['answers'][answerIndex]['color'] = Colors.red;
-      print("User selected the false answer");
-    }
-    for (var answer in _questions[questionIndex]['answers']) {
+  // void showCorrectAnswer(bool selectedAnswerIsTrue) {
+  //   if (selectedAnswerIsTrue) {
+  //     _questions[questionIndex]['answers'][answerIndex]['color'] = Colors.green;
+  //     print("User selected the true answer");
+  //   } else {
+  //     _questions[questionIndex]['answers'][answerIndex]['color'] = Colors.red;
+  //     print("User selected the false answer");
+  //   }
+  //   for (var answer in _questions[questionIndex]['answers']) {
+  //     if (answer['score'] == 1) {
+  //       answer['color'] = Colors.green;
+  //       print("The correct answer is: ${answer['text']}");
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
+
+  void isCheckSelectedAnsweriSCorrect(
+      {required Map<String, dynamic> selectedAnswer,
+      required int selectedAnswerIndex1}) {
+    selectedAnswerIndex = selectedAnswerIndex1;
+
+    for (int i = 0; i < _questions[questionIndex]['answers'].length; i++) {
+      var answer = _questions[questionIndex]['answers'][i];
       if (answer['score'] == 1) {
-        answer['color'] = Colors.green;
-        print("The correct answer is: ${answer['text']}");
+        correctAnswerIndex = i; // Update index only if correct answer is found
+        break; // Exit the loop once correct answer is found (optional)
       }
     }
     notifyListeners();
